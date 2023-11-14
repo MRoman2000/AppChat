@@ -15,15 +15,11 @@ import com.example.appchat.utils.AndroidUtils;
 import org.w3c.dom.Text;
 
 public class ChatActivity extends AppCompatActivity {
-
-
     UserModel otros;
     EditText message;
     ImageButton send;
     TextView username;
-
     ImageButton btnBack;
-
     RecyclerView recycler;
 
     @Override
@@ -38,8 +34,6 @@ public class ChatActivity extends AppCompatActivity {
         send = (ImageButton) findViewById(R.id.btn_send);
         username = (TextView) findViewById(R.id.username_text);
         recycler = findViewById(R.id.recycler_view);
-
-
         btnBack.setOnClickListener(v -> {
             onBackPressed();
         });
