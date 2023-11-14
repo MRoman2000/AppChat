@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item1"
+        android:icon="@drawable/ic_person"
+        android:title="Ajustes"
+
+        />
+    <item
+        android:id="@+id/item2"
+        android:icon="@drawable/ic_person"
+        android:title="Ajustes"
+        android:iconTint="@color/white"
+        />
+    <item
+        android:id="@+id/item3"
+        android:icon="@drawable/ic_person"
+        android:title="Ajustes"
+        android:iconTint="@color/segundario"
+        />
+    <item
+        android:id="@+id/item4"
+        android:icon="@drawable/ic_person"
+        android:title="Ajustes"
+        android:iconTint="@color/principal"
+        />
+
+</menu>
