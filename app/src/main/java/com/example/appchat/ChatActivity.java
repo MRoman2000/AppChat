@@ -1,6 +1,8 @@
 package com.example.appchat;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -9,18 +11,37 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.appchat.adapter.ChatRecyclerAdapter;
+import com.example.appchat.adapter.SearchUserRecyclerAdapter;
+import com.example.appchat.model.ChatMessageModel;
+import com.example.appchat.model.ChatRoomModel;
 import com.example.appchat.model.UserModel;
 import com.example.appchat.utils.AndroidUtils;
+import com.example.appchat.utils.FirebaseUtil;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Query;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class ChatActivity extends AppCompatActivity {
     UserModel otros;
-    EditText message;
+    String cchatroomId;
+    ChatRoomModel chatRoomModel;
+    ChatRecyclerAdapter adapterchat;
+    EditText messageEdit;
     ImageButton send;
     TextView username;
     ImageButton btnBack;
-    RecyclerView recycler;
+    RecyclerView recyclerView;
+
 
     @Override
 
@@ -29,16 +50,93 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         otros = AndroidUtils.getUserModel(getIntent());
-        btnBack = (ImageButton) findViewById(R.id.btnBack);
-        message = (EditText) findViewById(R.id.message_edit_text);
+        cchatroomId = FirebaseUtil.getChatroomId(FirebaseUtil.currentUser(), otros.getUserID());
+        btnBack = (ImageButton) findViewById(R.id.btnAtras);
+        messageEdit = (EditText) findViewById(R.id.message_edit_text);
         send = (ImageButton) findViewById(R.id.btn_send);
         username = (TextView) findViewById(R.id.username_text);
-        recycler = findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view);
         btnBack.setOnClickListener(v -> {
             onBackPressed();
         });
 
         username.setText(otros.getUsername());
+        send.setOnClickListener((v -> {
+            String message = messageEdit.getText().toString().trim();
+            if (message.isEmpty()) {
+                return;
+
+            } else {
+                sendMessage(message);
+            }
+
+        }));
+
+        getOnCreateChatroomModel();
+        getChatRecyclerView();
+
+    }
+
+    private void getChatRecyclerView() {
+        Query query = FirebaseUtil.getChatMessageReference(cchatroomId).orderBy("timestamp", Query.Direction.DESCENDING);
+
+        FirestoreRecyclerOptions<ChatMessageModel> options = new FirestoreRecyclerOptions.Builder<ChatMessageModel>().setQuery(query, ChatMessageModel.class).build();
+        adapterchat = new ChatRecyclerAdapter(options, getApplicationContext());
+        recyclerView.setAdapter(adapterchat);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setReverseLayout(true);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapterchat);
+        adapterchat.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                recyclerView.scrollToPosition(0);
+            }
+        });
+        adapterchat.startListening();
+
+    }
+
+    private void sendMessage(String message) {
+
+        chatRoomModel.setLastMessage(String.valueOf(Timestamp.now()));
+        chatRoomModel.setLastMessage(FirebaseUtil.currentUser());
+        chatRoomModel.setLastMessageSend(message);
+        FirebaseUtil.getChatRoomReference(cchatroomId).set(chatRoomModel);
+        ChatMessageModel chatMessageModel = new ChatMessageModel(message, FirebaseUtil.currentUser(), Timestamp.now());
+
+        FirebaseUtil.getChatMessageReference(cchatroomId).add((chatMessageModel)).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+                if (task.isSuccessful()) {
+                    messageEdit.setText("");
+                }
+            }
+        });
+
+
+    }
+
+    private void getOnCreateChatroomModel() {
+
+        FirebaseUtil.getChatRoomReference(cchatroomId).get().addOnCompleteListener(task -> {
+
+            if (task.isSuccessful()) {
+                chatRoomModel = task.getResult().toObject(ChatRoomModel.class);
+
+
+                if (chatRoomModel == null) {
+                    chatRoomModel = new ChatRoomModel(cchatroomId,
+                            Arrays.asList(FirebaseUtil.currentUser(), otros.getUserID()), Timestamp.now(),
+                            ""
+                    );
+                    FirebaseUtil.getChatRoomReference(cchatroomId).set(chatRoomModel);
+                }
+
+            }
+
+        });
 
     }
 }

@@ -1,9 +1,15 @@
 package com.example.appchat.utils;
 
+import android.annotation.SuppressLint;
+
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class FirebaseUtil {
     public static String currentUser() {
@@ -11,10 +17,7 @@ public class FirebaseUtil {
     }
 
     public static boolean isAuthenticated() {
-        if (currentUser() != null) {
-            return true;
-        }
-        return false;
+        return currentUser() != null;
     }
 
     public static DocumentReference documentReferenceUserID() {
@@ -33,7 +36,7 @@ public class FirebaseUtil {
 
     }
 
-    public static String getChatroom(String userId1, String userId2) {
+    public static String getChatroomId(String userId1, String userId2) {
         if (userId1.hashCode() < userId2.hashCode()) {
             return userId1 + "_" + userId2;
         } else {
@@ -41,4 +44,28 @@ public class FirebaseUtil {
         }
     }
 
+    public static CollectionReference getChatMessageReference(String charoom) {
+        return getChatRoomReference(charoom).collection("chats");
+    }
+
+    public static CollectionReference allChatConnections() {
+        return FirebaseFirestore.getInstance().collection("chatrooms");
+    }
+
+    public static DocumentReference getOtrosUser(List<String> userId) {
+
+
+        if (userId.get(0).equals(FirebaseUtil.currentUser())) {
+            return allusers().document(userId.get(1));
+        } else {
+            return allusers().document(userId.get(0));
+        }
+    }
+
+
+    public static String timestampToString(Timestamp timestamp) {
+
+        return new SimpleDateFormat("HH:MM").format(timestamp.toDate());
+    }
 }
+
