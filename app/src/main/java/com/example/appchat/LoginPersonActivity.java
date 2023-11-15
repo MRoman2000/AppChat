@@ -52,7 +52,7 @@ public class LoginPersonActivity extends AppCompatActivity {
             userModel = new UserModel(username, numeroTelefono, Timestamp.now(),FirebaseUtil.currentUser());
         }
 
-        FirebaseUtil.documentReferenceUserID().set(userModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+        FirebaseUtil.userDocumentReference().set(userModel).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 setinProgress(false);
@@ -68,7 +68,7 @@ public class LoginPersonActivity extends AppCompatActivity {
 
     private void getUsername() {
         setinProgress(true);
-        FirebaseUtil.documentReferenceUserID().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        FirebaseUtil.userDocumentReference().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 

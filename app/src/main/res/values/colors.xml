@@ -2,10 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="background">#232323</color>
-    <color name="principal">#06AF00</color>
-    <color name="segundario">#1B5E03</color>
-    <color name="off_white">#D5D5D5</color>
+    <color name="background">#1C1C1C</color>
+    <color name="principal">#058800</color>
+    <color name="segundario">#114200</color>
+    <color name="off_white">#9A9A9A</color>
     <color name="gris">#757575</color>
-    <color name="blue">#045F88</color>
+
+    <color name="blue">#0E8EC8</color>
+
+    <color name="dark_mode">#0E0E0E</color>
 </resources>

@@ -11,6 +11,7 @@
 
 
     <ImageView
+        android:id="@+id/profile_image"
         android:layout_width="165dp"
         android:layout_height="165dp"
         android:layout_marginBottom="40dp"
@@ -29,8 +30,7 @@
         android:elevation="5dp"
         android:hint="username"
         android:inputType="text"
-        android:padding="10dp"
-        android:textColor="@color/white">
+        android:padding="10dp">
 
     </EditText>
 
@@ -45,18 +45,18 @@
         android:enabled="false"
         android:hint="telefono"
         android:inputType="phone"
-        android:padding="10dp"
-        android:textColor="@color/white">
+        android:padding="10dp">
 
     </EditText>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="160dp"
         android:layout_marginTop="20dp"
         android:orientation="vertical">
 
         <Button
+            style="@style/ButtonStyle"
             android:id="@+id/btnSeguir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,6 +74,7 @@
         </ProgressBar>
     </LinearLayout>
     <Button
+        style="@style/ButtonStyle"
         android:id="@+id/Logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

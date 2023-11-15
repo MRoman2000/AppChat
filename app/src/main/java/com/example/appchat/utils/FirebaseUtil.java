@@ -2,6 +2,7 @@ package com.example.appchat.utils;
 
 import android.annotation.SuppressLint;
 
+import com.google.firebase.Firebase;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -20,7 +21,7 @@ public class FirebaseUtil {
         return currentUser() != null;
     }
 
-    public static DocumentReference documentReferenceUserID() {
+    public static DocumentReference userDocumentReference() {
         return FirebaseFirestore.getInstance().collection("users")
                 .document(currentUser());
 
@@ -66,6 +67,10 @@ public class FirebaseUtil {
     public static String timestampToString(Timestamp timestamp) {
 
         return new SimpleDateFormat("HH:MM").format(timestamp.toDate());
+    }
+
+    public static void logout() {
+        FirebaseAuth.getInstance().signOut();
     }
 }
 

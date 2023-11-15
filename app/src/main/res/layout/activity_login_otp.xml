@@ -119,6 +119,7 @@
         android:orientation="vertical" />
 
     <Button
+        style="@style/ButtonStyle"
         android:id="@+id/btnSeguiente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
