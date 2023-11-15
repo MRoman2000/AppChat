@@ -38,7 +38,7 @@ public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserMode
         holder.telefonoText.setText(model.getTelefono());
 
         if (model.getUserID().equals(FirebaseUtil.currentUser())) {
-            holder.usernameText.setText(model.getUsername() + ("yo"));
+            holder.usernameText.setText(model.getUsername() + (" (Yo) "));
 
         }
 
