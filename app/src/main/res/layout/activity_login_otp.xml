@@ -101,7 +101,7 @@
             android:background="@drawable/edit_text_rounded"
             android:elevation="5dp"
             android:textColor="@color/white"
-            android:hint="Telefono"
+            android:hint="Codigo"
             android:inputType="number"
             android:maxLength="6"
             android:padding="10dp">
@@ -109,13 +109,10 @@
         </EditText>
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-
         android:gravity="center_vertical"
-
         android:orientation="vertical" />
 
     <Button

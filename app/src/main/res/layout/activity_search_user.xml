@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="65dp"
         android:background="@color/principal"
         android:padding="10dp">
 
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="15dp"
             android:layout_toEndOf="@+id/btnBack"
             android:text="@string/users"
             android:textColor="@color/white"
@@ -29,6 +29,7 @@
             android:id="@+id/btnBack"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:padding="10dp"
             android:layout_centerVertical="true"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/baseline_keyboard_backspace_24"
@@ -59,9 +60,10 @@
                 android:hint="@string/username" />
         
         <ImageButton
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:id="@+id/btnSearch"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_search" />

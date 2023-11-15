@@ -12,7 +12,7 @@
 
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="65dp"
         android:background="@color/principal"
         android:padding="10dp">
 
@@ -79,6 +79,7 @@
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="10dp"
             android:src="@drawable/ic_send" />
 

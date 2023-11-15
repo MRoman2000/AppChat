@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="65dp"
         android:background="@color/principal"
         android:padding="10dp">
 
@@ -24,9 +24,11 @@
             android:textSize="22sp" />
 
         <ImageView
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:id="@+id/btnSearch"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_centerInParent="true"
             android:layout_alignParentEnd="true"
             android:src="@drawable/ic_search"
             app:tint="@color/white" />

@@ -21,13 +21,6 @@
             android:name=".SearchUserActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login" />
-        <activity
-            android:name=".SearchActivity"
-            android:exported="false" />
-        <activity
             android:name=".LoginPersonActivity"
             android:exported="false"
             android:label="@string/title_activity_person_login"

@@ -55,14 +55,16 @@
         android:layout_marginTop="20dp"
         android:orientation="vertical">
 
-        <Button
-            style="@style/ButtonStyle"
+        <androidx.appcompat.widget.AppCompatButton
+
             android:id="@+id/btnSeguir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:backgroundTint="@color/gris"
             android:background="@drawable/btn_rounded"
             android:text="Actulizar Perfil" />
+
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -72,13 +74,14 @@
             android:layout_marginTop="50dp">
 
         </ProgressBar>
+
     </LinearLayout>
-    <Button
-        style="@style/ButtonStyle"
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/Logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/btn_rounded"
+        android:backgroundTint="@color/red"
         android:text="Logout" />
 </LinearLayout>
