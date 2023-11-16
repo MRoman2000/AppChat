@@ -9,19 +9,35 @@
         android:id="@+id/left_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
-        android:background="@drawable/edit_text_rounded"
-        android:backgroundTint="@color/principal"
-        android:padding="8dp">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/left_chat"
+        <!-- Imagen del perfil -->
+        <include
+            android:id="@+id/profile_image"
+            layout="@layout/profile_image_view"
+            android:layout_width="30dp"
+            android:layout_gravity="center"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp" />
+
+        <!-- Mensaje -->
+        <LinearLayout
+            android:id="@+id/message_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:background="@drawable/edit_text_rounded"
+            android:backgroundTint="@color/principal"
+            android:padding="5dp">
 
+            <!-- Aquí puedes agregar otros elementos si es necesario -->
+            <TextView
+                android:id="@+id/left_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
+        </LinearLayout>
     </LinearLayout>
 
 

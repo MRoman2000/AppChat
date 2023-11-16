@@ -3,6 +3,7 @@ package com.example.appchat.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,14 @@ public class ChatRecentRecyclerAdapter extends FirestoreRecyclerAdapter<ChatRoom
             if (task.isSuccessful()) {
                 boolean lastMessageSendByMe = model.getUserid().equals(FirebaseUtil.currentUser());
                 UserModel userModel = task.getResult().toObject(UserModel.class);
+
+             FirebaseUtil.getOtherProfileStorage(userModel.getUserID()).getDownloadUrl().addOnCompleteListener(t -> {
+                    if (t.isSuccessful()) {
+                        Uri uri = t.getResult();
+                        AndroidUtils.setProfilePic(context, uri, holder.imageView);
+                    }
+                });
+
                 holder.usernameText.setText(userModel.getUsername());
                 if (lastMessageSendByMe) {
                     holder.lastMessageText.setText(model.getLastMessageSend());

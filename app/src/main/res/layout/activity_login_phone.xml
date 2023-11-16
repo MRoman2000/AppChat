@@ -93,6 +93,7 @@
 
         <com.hbb20.CountryCodePicker
             android:id="@+id/countryCode"
+            app:ccpDialog_textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -101,13 +102,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textColor="@color/principal"
             android:background="@drawable/edit_text_rounded"
             android:elevation="5dp"
-
             android:hint="Telefono"
             android:inputType="phone"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:textColor="@color/principal">
 
         </EditText>
     </LinearLayout>
