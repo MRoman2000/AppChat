@@ -71,7 +71,6 @@ public class ChatFragment extends Fragment {
             adapter.stopListening();
         }
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -79,5 +78,6 @@ public class ChatFragment extends Fragment {
             adapter.notifyDataSetChanged();
         }
     }
+
 
 }

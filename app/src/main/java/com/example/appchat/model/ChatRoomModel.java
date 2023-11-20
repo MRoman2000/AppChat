@@ -8,18 +8,21 @@ public class ChatRoomModel {
 
     String chatroomId;
     List<String> userIds;
-    Timestamp lastMessagetimestamp;
+    Timestamp lastMessageTimestamp;
     String lastMessageSenderId;
     String lastMessage;
 
 
     public ChatRoomModel() {
+        boolean isNewMessage;
+
     }
 
-    public ChatRoomModel(String chatroomId, List<String> userIds, Timestamp lastMessagetimestamp, String lastMessageSenderId) {
+
+    public ChatRoomModel(String chatroomId, List<String> userIds, Timestamp lastMessageTimestamp, String lastMessageSenderId) {
         this.chatroomId = chatroomId;
         this.userIds = userIds;
-        this.lastMessagetimestamp = lastMessagetimestamp;
+        this.lastMessageTimestamp = lastMessageTimestamp;
         this.lastMessageSenderId = lastMessageSenderId;
     }
 
@@ -39,12 +42,12 @@ public class ChatRoomModel {
         this.userIds = userIds;
     }
 
-    public Timestamp getLastMessagetimestamp() {
-        return lastMessagetimestamp;
+    public Timestamp getLastMessageTimestamp() {
+        return lastMessageTimestamp;
     }
 
-    public void setLastMessagetimestamp(Timestamp lastMessagetimestamp) {
-        this.lastMessagetimestamp = lastMessagetimestamp;
+    public void setLastMessageTimestamp(Timestamp lastMessageTimestamp) {
+        this.lastMessageTimestamp = lastMessageTimestamp;
     }
 
     public String getLastMessageSenderId() {
@@ -62,4 +65,6 @@ public class ChatRoomModel {
     public void setLastMessage(String lastMessage) {
         this.lastMessage = lastMessage;
     }
+
+
 }
