@@ -8,6 +8,7 @@
         <item name="colorSecondary">@color/segundario</item>
         <item name="colorSecondaryVariant">@color/segundario</item>
         <item name="android:textColor">@color/white</item>
+       
         <item name="android:windowBackground">@color/dark_mode</item>
 
     </style>
