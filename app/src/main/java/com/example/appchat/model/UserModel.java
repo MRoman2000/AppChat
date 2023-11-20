@@ -7,7 +7,6 @@ public class UserModel {
     private String username;
     private String telefono;
     private Timestamp timestamp;
-
     private String userID;
 
     public UserModel() {

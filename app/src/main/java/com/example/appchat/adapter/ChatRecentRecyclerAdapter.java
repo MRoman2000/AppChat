@@ -36,33 +36,14 @@ public class ChatRecentRecyclerAdapter extends FirestoreRecyclerAdapter<ChatRoom
     @Override
     protected void onBindViewHolder(@NonNull ChatRoomModelViewHolder holder, int position, @NonNull ChatRoomModel model) {
 
-        FirebaseUtil.getOtrosUser(model.getUserid()).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                boolean lastMessageSendByMe = model.getUserid().equals(FirebaseUtil.currentUser());
+
+        FirebaseUtil.getChatRoomReference(model.getChatroomId()).get().addOnCompleteListener(task ->  {
+
+            if(task.isSuccessful()) {
                 UserModel userModel = task.getResult().toObject(UserModel.class);
-
-             FirebaseUtil.getOtherProfileStorage(userModel.getUserID()).getDownloadUrl().addOnCompleteListener(t -> {
-                    if (t.isSuccessful()) {
-                        Uri uri = t.getResult();
-                        AndroidUtils.setProfilePic(context, uri, holder.imageView);
-                    }
-                });
-
                 holder.usernameText.setText(userModel.getUsername());
-                if (lastMessageSendByMe) {
-                    holder.lastMessageText.setText(model.getLastMessageSend());
-                }
-                holder.lastMessageText.setText("Yo: " + model.getLastMessageSend());
-                holder.LastMessageTime.setText(FirebaseUtil.timestampToString(model.getTimestamp()));
-
-                holder.itemView.setOnClickListener(v -> {
-
-                    Intent intent = new Intent(context, ChatActivity.class);
-                    AndroidUtils.passUserModel(intent, userModel);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
-                });
-
+                holder.lastMessageText.setText(model.getLastMessage());
+                holder.lastMessageText.setText(model.getLastMessagetimestamp().toString());
             }
         });
     }
@@ -80,14 +61,13 @@ public class ChatRecentRecyclerAdapter extends FirestoreRecyclerAdapter<ChatRoom
         TextView usernameText;
         TextView lastMessageText;
         TextView LastMessageTime;
-        ImageView imageView;
 
         public ChatRoomModelViewHolder(@NonNull View itemView) {
             super(itemView);
             usernameText = itemView.findViewById(R.id.username_text);
             lastMessageText = itemView.findViewById(R.id.last_message);
             LastMessageTime = itemView.findViewById(R.id.last_time_message);
-            imageView = itemView.findViewById(R.id.image_view);
+
 
         }
     }

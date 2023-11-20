@@ -37,28 +37,26 @@ public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserMode
 
         holder.usernameText.setText(model.getUsername());
         holder.telefonoText.setText(model.getTelefono());
-
         if (model.getUserID().equals(FirebaseUtil.currentUser())) {
             holder.usernameText.setText(model.getUsername() + (" (Yo) "));
+        }
+        else  {
+            FirebaseUtil.getOtherProfileStorage(model.getUserID()).getDownloadUrl().addOnCompleteListener(t -> {
+                if (t.isSuccessful()) {
+                    Uri uri = t.getResult();
+                    AndroidUtils.setProfilePic(context, uri, holder.imageView);
+                }
+            });
 
+
+            holder.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, ChatActivity.class);
+                AndroidUtils.passUserModel(intent, model);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            });
         }
 
-        FirebaseUtil.getOtherProfileStorage(model.getUserID()).getDownloadUrl().addOnCompleteListener(t -> {
-            if (t.isSuccessful()) {
-                Uri uri = t.getResult();
-                AndroidUtils.setProfilePic(context, uri, holder.imageView);
-            }
-        });
-
-
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ChatActivity.class);
-            AndroidUtils.passUserModel(intent, model);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-
-
-        });
 
     }
 
@@ -74,7 +72,6 @@ public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserMode
 
         TextView usernameText;
         TextView telefonoText;
-
         ImageView imageView;
 
         public SearchUserRecyclerHolder(@NonNull View itemView) {

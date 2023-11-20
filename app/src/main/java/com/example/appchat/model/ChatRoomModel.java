@@ -6,45 +6,53 @@ import java.util.List;
 
 public class ChatRoomModel {
 
-    String chatRoomid;
-    List<String> userId;
-    Timestamp timestamp;
+    String chatroomId;
+    List<String> userIds;
+    Timestamp lastMessagetimestamp;
+    String lastMessageSenderId;
     String lastMessage;
-    String lastMessageSend;
 
 
     public ChatRoomModel() {
     }
 
-    public ChatRoomModel(String chatRoomid, List<String> userId, Timestamp timestamp, String lastMessage) {
-        this.chatRoomid = chatRoomid;
-        this.userId = userId;
-        this.timestamp = timestamp;
-        this.lastMessage = lastMessage;
+    public ChatRoomModel(String chatroomId, List<String> userIds, Timestamp lastMessagetimestamp, String lastMessageSenderId) {
+        this.chatroomId = chatroomId;
+        this.userIds = userIds;
+        this.lastMessagetimestamp = lastMessagetimestamp;
+        this.lastMessageSenderId = lastMessageSenderId;
     }
 
-    public String getChatRoomid() {
-        return chatRoomid;
+    public String getChatroomId() {
+        return chatroomId;
     }
 
-    public void setChatRoomid(String chatRoomid) {
-        this.chatRoomid = chatRoomid;
+    public void setChatroomId(String chatroomId) {
+        this.chatroomId = chatroomId;
     }
 
-    public List<String> getUserid() {
-        return userId;
+    public List<String> getUserIds() {
+        return userIds;
     }
 
-    public void setUserid(List<String> userId) {
-        this.userId = userId;
+    public void setUserIds(List<String> userIds) {
+        this.userIds = userIds;
     }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
+    public Timestamp getLastMessagetimestamp() {
+        return lastMessagetimestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+    public void setLastMessagetimestamp(Timestamp lastMessagetimestamp) {
+        this.lastMessagetimestamp = lastMessagetimestamp;
+    }
+
+    public String getLastMessageSenderId() {
+        return lastMessageSenderId;
+    }
+
+    public void setLastMessageSenderId(String lastMessageSenderId) {
+        this.lastMessageSenderId = lastMessageSenderId;
     }
 
     public String getLastMessage() {
@@ -54,14 +62,4 @@ public class ChatRoomModel {
     public void setLastMessage(String lastMessage) {
         this.lastMessage = lastMessage;
     }
-
-    public String getLastMessageSend() {
-        return lastMessageSend;
-    }
-
-    public void setLastMessageSend(String lastMessageSend) {
-        this.lastMessageSend = lastMessageSend;
-    }
-
-
 }

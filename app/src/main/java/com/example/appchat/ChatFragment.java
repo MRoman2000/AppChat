@@ -36,23 +36,26 @@ public class ChatFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_chat_view);
-        setupSearchRecyclerView();
+        setupRecyclerView();
         return view;
     }
 
-    private void setupSearchRecyclerView() {
+    void setupRecyclerView(){
 
         Query query = FirebaseUtil.allChatConnections()
-                .whereArrayContains("userid", FirebaseUtil.currentUser())
-                .orderBy("timestamp", Query.Direction.DESCENDING);
+                .whereArrayContains("userIds",FirebaseUtil.currentUser())
+                .orderBy("lastMessageTimestamp",Query.Direction.DESCENDING);
 
-        FirestoreRecyclerOptions<ChatRoomModel> options = new FirestoreRecyclerOptions.Builder<ChatRoomModel>().setQuery(query, ChatRoomModel.class).build();
-        adapter = new ChatRecentRecyclerAdapter(options, getContext());
-        recyclerView.setAdapter(adapter);
+        FirestoreRecyclerOptions<ChatRoomModel> options = new FirestoreRecyclerOptions.Builder<ChatRoomModel>()
+                .setQuery(query,ChatRoomModel.class).build();
+
+        adapter = new ChatRecentRecyclerAdapter(options,getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
         adapter.startListening();
 
     }
+
 
     @Override
     public void onStart() {
