@@ -3,6 +3,7 @@ package com.example.appchat.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,6 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class ChatRecyclerAdapter extends FirestoreRecyclerAdapter<ChatMessageModel, ChatRecyclerAdapter.ChatMessageModelViewHolder> {
-
     Context context;
 
     public ChatRecyclerAdapter(@NonNull FirestoreRecyclerOptions<ChatMessageModel> options, Context context) {
@@ -31,7 +31,7 @@ public class ChatRecyclerAdapter extends FirestoreRecyclerAdapter<ChatMessageMod
 
     }
 
-    @SuppressLint("SetTextI18n")
+
     @Override
     protected void onBindViewHolder(@NonNull ChatMessageModelViewHolder holder, int position, @NonNull ChatMessageModel model) {
 
@@ -45,15 +45,12 @@ public class ChatRecyclerAdapter extends FirestoreRecyclerAdapter<ChatMessageMod
             holder.chatleft.setText(model.getMessage());
 
         }
-
-
     }
 
     @NonNull
     @Override
     public ChatMessageModelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.chat_message_recycler, parent, false);
-
         return new ChatMessageModelViewHolder(view);
     }
 
@@ -61,14 +58,16 @@ public class ChatRecyclerAdapter extends FirestoreRecyclerAdapter<ChatMessageMod
 
         LinearLayout leftchatLayout, rightchatLayout;
         TextView chatleft, chatright;
+        ImageView imageView;
 
         public ChatMessageModelViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            leftchatLayout = itemView.findViewById(R.id.left_message);
-            rightchatLayout = itemView.findViewById(R.id.right_message);
-            chatleft = itemView.findViewById(R.id.left_chat);
-            chatright = itemView.findViewById(R.id.right_chat);
+            leftchatLayout = itemView.findViewById(R.id.layout_left);
+            rightchatLayout = itemView.findViewById(R.id.layout_right);
+            chatleft = itemView.findViewById(R.id.chat_left);
+            chatright = itemView.findViewById(R.id.chat_right);
+            imageView = itemView.findViewById(R.id.image_view);
         }
     }
 }
