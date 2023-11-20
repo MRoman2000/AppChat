@@ -43,8 +43,8 @@ public class ChatFragment extends Fragment {
     private void setupSearchRecyclerView() {
 
         Query query = FirebaseUtil.allChatConnections()
-                .whereArrayContains("userid", FirebaseUtil.currentUser())
-                .orderBy("timestamp", Query.Direction.DESCENDING);
+                .whereArrayContains("userIds",FirebaseUtil.currentUser())
+                .orderBy("lastMessageTimestamp",Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions<ChatRoomModel> options = new FirestoreRecyclerOptions.Builder<ChatRoomModel>().setQuery(query, ChatRoomModel.class).build();
         adapter = new ChatRecentRecyclerAdapter(options, getContext());
@@ -68,7 +68,6 @@ public class ChatFragment extends Fragment {
             adapter.stopListening();
         }
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -76,5 +75,6 @@ public class ChatFragment extends Fragment {
             adapter.notifyDataSetChanged();
         }
     }
+
 
 }

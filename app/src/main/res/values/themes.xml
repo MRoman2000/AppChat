@@ -4,7 +4,7 @@
 
         <item name="colorPrimary">@color/principal</item>
         <item name="colorPrimaryVariant">@color/principal</item>
-
+        <item name="android:statusBarColor">@android:color/transparent</item>
 
         <item name="colorSecondary">@color/segundario</item>
         <item name="colorSecondaryVariant">@color/segundario</item>

@@ -24,8 +24,7 @@ public class FirebaseUtil {
     }
 
     public static DocumentReference userDocumentReference() {
-        return FirebaseFirestore.getInstance().collection("users")
-                .document(currentUser());
+        return FirebaseFirestore.getInstance().collection("users").document(currentUser());
 
     }
 
@@ -80,6 +79,7 @@ public class FirebaseUtil {
 
 
     }
+
     public static StorageReference getOtherProfileStorage(String otros) {
         return FirebaseStorage.getInstance().getReference().child("profile_file").child(otros);
 
